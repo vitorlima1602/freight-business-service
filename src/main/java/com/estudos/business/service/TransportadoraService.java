@@ -1,5 +1,6 @@
 package com.estudos.business.service;
 
+import com.estudos.business.dto.AtualizarTransportadoraRequest;
 import com.estudos.business.dto.TransportadoraRequest;
 import com.estudos.business.dto.TransportadoraResponse;
 import com.estudos.business.entity.Transportadora;
@@ -32,6 +33,35 @@ public class TransportadoraService {
         Transportadora transportadoraSalva = transportadoraRepository.save(transportadora);
 
         return transportadoraMapper.toResponse(transportadoraSalva);
+    }
+
+    public TransportadoraResponse atualizar(Long id, AtualizarTransportadoraRequest request){
+        Transportadora transportadora = buscarPorId(id);
+
+        transportadoraMapper.updateEntity(request, transportadora);
+
+        Transportadora transportadoraAtualizada = transportadoraRepository.save(transportadora);
+
+        return transportadoraMapper.toResponse(transportadoraAtualizada);
+    }
+
+    public TransportadoraResponse desativar(Long id){
+        return alterarStatus(id, false);
+    }
+
+    public TransportadoraResponse ativar(Long id) {
+        return alterarStatus(id, true);
+    }
+
+    private TransportadoraResponse alterarStatus(Long id, boolean ativa) {
+        Transportadora transportadora = buscarPorId(id);
+
+        transportadora.setAtiva(ativa);
+
+        Transportadora transportadoraAtualizada =
+                transportadoraRepository.save(transportadora);
+
+        return transportadoraMapper.toResponse(transportadoraAtualizada);
     }
 
     public Transportadora buscarPorId(Long id){
