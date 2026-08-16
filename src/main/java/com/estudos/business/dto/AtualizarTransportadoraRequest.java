@@ -1,9 +1,18 @@
 package com.estudos.business.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class AtualizarTransportadoraRequest {
+    @NotBlank(message = "Razão social é obrigatória.")
     private String razaoSocial;
+
     private String nomeFantasia;
+
+    @NotBlank(message = "E-mail é obrigatório.")
+    @Email(message = "E-mail inválido.")
     private String email;
+
     private String telefone;
 
     public String getRazaoSocial() {
