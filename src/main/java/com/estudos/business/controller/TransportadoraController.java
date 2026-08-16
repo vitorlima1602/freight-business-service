@@ -1,5 +1,6 @@
 package com.estudos.business.controller;
 
+import com.estudos.business.dto.AtualizarTransportadoraRequest;
 import com.estudos.business.dto.TransportadoraRequest;
 import com.estudos.business.dto.TransportadoraResponse;
 import com.estudos.business.service.TransportadoraService;
@@ -23,5 +24,29 @@ public class TransportadoraController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TransportadoraResponse> atualizar(@PathVariable Long id, @RequestBody AtualizarTransportadoraRequest request){
+        TransportadoraResponse response = transportadoraService.atualizar(id, request);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/desativar")
+    public ResponseEntity<TransportadoraResponse> desativar(@PathVariable Long id){
+        TransportadoraResponse response = transportadoraService.desativar(id);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/ativar")
+    public ResponseEntity<TransportadoraResponse> ativar(
+            @PathVariable Long id
+    ) {
+        TransportadoraResponse response =
+                transportadoraService.ativar(id);
+
+        return ResponseEntity.ok(response);
     }
 }

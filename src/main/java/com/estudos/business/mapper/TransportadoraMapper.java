@@ -1,5 +1,6 @@
 package com.estudos.business.mapper;
 
+import com.estudos.business.dto.AtualizarTransportadoraRequest;
 import com.estudos.business.dto.TransportadoraRequest;
 import com.estudos.business.dto.TransportadoraResponse;
 import com.estudos.business.entity.Transportadora;
@@ -31,5 +32,12 @@ public class TransportadoraMapper {
         response.setAtiva(transportadora.getAtiva());
 
         return response;
+    }
+
+    public void updateEntity(AtualizarTransportadoraRequest request, Transportadora transportadora){
+        transportadora.setRazaoSocial(request.getRazaoSocial());
+        transportadora.setNomeFantasia(request.getNomeFantasia());
+        transportadora.setEmail(request.getEmail());
+        transportadora.setTelefone(request.getTelefone());
     }
 }
