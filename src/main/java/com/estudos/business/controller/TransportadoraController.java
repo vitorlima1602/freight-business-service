@@ -4,6 +4,7 @@ import com.estudos.business.dto.AtualizarTransportadoraRequest;
 import com.estudos.business.dto.TransportadoraRequest;
 import com.estudos.business.dto.TransportadoraResponse;
 import com.estudos.business.service.TransportadoraService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class TransportadoraController {
     }
 
     @PostMapping
-    public ResponseEntity<TransportadoraResponse> salvar(@RequestBody TransportadoraRequest request){
+    public ResponseEntity<TransportadoraResponse> salvar(@Valid @RequestBody TransportadoraRequest request){
         TransportadoraResponse response = transportadoraService.salvar(request);
 
         return ResponseEntity
@@ -27,7 +28,7 @@ public class TransportadoraController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TransportadoraResponse> atualizar(@PathVariable Long id, @RequestBody AtualizarTransportadoraRequest request){
+    public ResponseEntity<TransportadoraResponse> atualizar(@PathVariable Long id, @Valid @RequestBody AtualizarTransportadoraRequest request){
         TransportadoraResponse response = transportadoraService.atualizar(id, request);
 
         return ResponseEntity.ok(response);
