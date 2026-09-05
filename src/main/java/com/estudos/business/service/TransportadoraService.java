@@ -3,9 +3,12 @@ package com.estudos.business.service;
 import com.estudos.business.dto.AtualizarTransportadoraRequest;
 import com.estudos.business.dto.TransportadoraRequest;
 import com.estudos.business.dto.TransportadoraResponse;
+import com.estudos.business.entity.Endereco;
 import com.estudos.business.entity.Transportadora;
 import com.estudos.business.exception.RegraNegocioException;
+import com.estudos.business.mapper.EnderecoMapper;
 import com.estudos.business.mapper.TransportadoraMapper;
+import com.estudos.business.repository.EnderecoRepository;
 import com.estudos.business.repository.TransportadoraRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +16,15 @@ import org.springframework.stereotype.Service;
 public class TransportadoraService {
     private final TransportadoraRepository transportadoraRepository;
     private final TransportadoraMapper transportadoraMapper;
+    private  final EnderecoRepository enderecoRepository;
+    private final EnderecoMapper enderecoMapper;
 
-    public TransportadoraService(TransportadoraRepository transportadoraRepository, TransportadoraMapper transportadoraMapper) {
+    public TransportadoraService(TransportadoraRepository transportadoraRepository, TransportadoraMapper transportadoraMapper,
+                                 EnderecoRepository enderecoRepository, EnderecoMapper enderecoMapper) {
         this.transportadoraRepository = transportadoraRepository;
         this.transportadoraMapper = transportadoraMapper;
+        this.enderecoRepository = enderecoRepository;
+        this.enderecoMapper = enderecoMapper;
     }
 
     public TransportadoraResponse salvar(TransportadoraRequest request){
@@ -31,6 +39,18 @@ public class TransportadoraService {
         transportadora.setAtiva(true);
 
         Transportadora transportadoraSalva = transportadoraRepository.save(transportadora);
+
+
+
+        if (request.getEndereco() != null) {
+            Endereco endereco = enderecoMapper.toEntity(request.getEndereco());
+
+            endereco.setTransportadora(transportadoraSalva);
+
+            enderecoRepository.save(endereco);
+
+            transportadoraSalva.setEndereco(endereco);
+        }
 
         return transportadoraMapper.toResponse(transportadoraSalva);
     }
