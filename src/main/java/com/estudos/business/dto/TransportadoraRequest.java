@@ -23,6 +23,8 @@ public class TransportadoraRequest {
 
     private String telefone;
 
+    private EnderecoRequest endereco;
+
     public String getRazaoSocial() {
         return razaoSocial;
     }
@@ -61,5 +63,13 @@ public class TransportadoraRequest {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public EnderecoRequest getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoRequest endereco) {
+        this.endereco = endereco;
     }
 }

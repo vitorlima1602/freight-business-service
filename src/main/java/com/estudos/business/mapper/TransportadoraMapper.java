@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TransportadoraMapper {
+    private final EnderecoMapper enderecoMapper;
+
+    public TransportadoraMapper(EnderecoMapper enderecoMapper) {
+        this.enderecoMapper = enderecoMapper;
+    }
+
     public Transportadora toEntity(TransportadoraRequest request){
         Transportadora transportadora = new Transportadora();
 
@@ -30,6 +36,9 @@ public class TransportadoraMapper {
         response.setEmail(transportadora.getEmail());
         response.setTelefone(transportadora.getTelefone());
         response.setAtiva(transportadora.getAtiva());
+        response.setEndereco(
+                enderecoMapper.toResponse(transportadora.getEndereco())
+        );
 
         return response;
     }

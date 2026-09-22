@@ -25,6 +25,9 @@ public class Transportadora {
     @Column(nullable = false)
     private Boolean ativa;
 
+    @OneToOne(mappedBy = "transportadora")
+    private Endereco endereco;
+
     public Long getId() {
         return id;
     }
@@ -79,5 +82,13 @@ public class Transportadora {
 
     public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

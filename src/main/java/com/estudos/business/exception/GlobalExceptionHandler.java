@@ -18,6 +18,14 @@ public class GlobalExceptionHandler {
                 .body(exception.getMessage());
     }
 
+    @ExceptionHandler(TransportadoraNaoEncontradaException.class)
+    public  ResponseEntity<String> tratarTransportadoraNaoEncontradaException(
+            TransportadoraNaoEncontradaException exception){
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, String>> tratarErroValidacao(MethodArgumentNotValidException exception){
         Map<String, String> erros = new HashMap<>();

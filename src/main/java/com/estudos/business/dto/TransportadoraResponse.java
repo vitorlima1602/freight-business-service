@@ -8,6 +8,7 @@ public class TransportadoraResponse {
     private String email;
     private String telefone;
     private Boolean ativa;
+    private EnderecoResponse endereco;
 
     public Long getId() {
         return id;
@@ -63,5 +64,13 @@ public class TransportadoraResponse {
 
     public void setAtiva(Boolean ativa) {
         this.ativa = ativa;
+    }
+
+    public EnderecoResponse getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(EnderecoResponse endereco) {
+        this.endereco = endereco;
     }
 }
